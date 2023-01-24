@@ -1,18 +1,3 @@
-/**
- *  Get a list of users
- *  -> first user is your own account, remove from entire list
- *  -> generate own account data
- *  -> generate pagination data
- *  -> create frequency lists of skills and positions
- *  -> generate network feed + establish subscription status for each user (active, blocked, idle, pending) + set badge for most popular skill
- *
- * On page change
- *  -> if new page is the same with current page DO NOTHING!
- *  -> clear current feed
- *  -> set new page as active
- *  -> generate network feed + establish subscription status for each user (active, blocked, idle, pending) + set badge for most popular skill
- */
-
 let networkUsers = [];
 let skills = {};
 let positions = {};
@@ -200,7 +185,6 @@ function getPagesConfiguration() {
   for (let pageNumber = 1; pageNumber <= totalPages; pageNumber++) {
     const pageNumberElement = document.createElement("div");
     pageNumberElement.classList.add("page-number");
-    // Solutia 2
     pageNumberElement.setAttribute("data-page", pageNumber);
 
     if (pageNumber === currentPage) {
@@ -211,11 +195,8 @@ function getPagesConfiguration() {
     pageNumberElement.appendChild(pageNumberText);
 
     pageNumberElement.addEventListener("click", (event) => {
-      // Solutia 2
       const page = parseInt(event.target.getAttribute("data-page"));
 
-      // Solutia 1
-      // const page = parseInt(event.target.innerText);
       if (page === currentPage) {
         return;
       }
@@ -238,9 +219,6 @@ function getPagesConfiguration() {
 
   setResultsNumberElement();
 }
-
-// max displayed = 10
-// current page = 2 => Showing users from 11 to 20
 
 function setResultsNumberElement() {
   const startingNumber = (currentPage - 1) * maxDisplayedUsers + 1;
